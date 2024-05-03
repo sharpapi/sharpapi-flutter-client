@@ -1,10 +1,10 @@
 ![SharpAPI GitHub cover](https://sharpapi.com/sharpapi-github-php-bg.jpg "SharpAPI Flutter Client")
 
-# SharpAPI Flutter Client
+# SharpAPI Flutter Client SDK
 
-### AI-Powered Swiss Army Knife API for every software developer
+## 🚀 Automate with AI in just two lines of code. Save countless hours and enhance your app effortlessly.
 
-## Save countless hours and supercharge your app with AI capabilities in just 2 lines of code.
+### Leverage AI API to streamline workflows in E-Commerce, Marketing, Content Management, HR Tech, Travel, and more.
 
 #### Save time on repetitive content analysis and generation tasks that your app users perform daily.
 
