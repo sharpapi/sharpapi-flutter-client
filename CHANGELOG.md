@@ -2,7 +2,7 @@
 
 ## August 1, 2024 - v1.2.0
 - v1.2.0 updated release
-- 
+
 ### 1. new methods added
 
 #### 1.2. Paraphrase text: `paraphrase()`
