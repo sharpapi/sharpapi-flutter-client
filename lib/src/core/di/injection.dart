@@ -6,6 +6,7 @@ import 'package:sharpapi_flutter_client/src/core/network/repository.dart';
 import 'package:sharpapi_flutter_client/src/e_commerce/e_commerce_api_service.dart';
 import 'package:sharpapi_flutter_client/src/hr/hr_api_service.dart';
 import 'package:sharpapi_flutter_client/src/seo/seo_api_service.dart';
+import 'package:sharpapi_flutter_client/src/subscription_info/subscription_info_api_service.dart';
 import 'package:sharpapi_flutter_client/src/travel_tourism_hospitality/travel_tourism_hospitality_api_service.dart';
 
 final sl = GetIt.instance;
@@ -41,6 +42,13 @@ Future<void> initDi() async {
 
   sl.registerFactory(
         () => ContentAndMarketingApiService(
+      repository: sl(),
+      sharpApiService: sl(),
+    ),
+  );
+
+  sl.registerFactory(
+        () => SubscriptionInfoApiService(
       repository: sl(),
       sharpApiService: sl(),
     ),

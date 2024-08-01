@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class JobModel {
   String? type;
   String? id;
@@ -15,6 +17,6 @@ class JobModel {
         type: json['data'] != null ? json['data']['attributes']['type'] : '',
         id: json['data'] != null ? json['data']['id'] : '',
         status: json['data'] != null ? json['data']['attributes']['status'] : '',
-        result: json['data'] != null ? json['data']['attributes']['result'] : null,
+        result: json['data'] != null ? jsonEncode(json['data']['attributes']['result']) : null,
       );
 }

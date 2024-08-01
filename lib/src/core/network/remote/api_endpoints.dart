@@ -44,7 +44,17 @@ const String detectEmailsRoute = 'content/detect_emails';
 
 const String summarizeTextRoute = 'content/summarize';
 
+const String paraphraseTextRoute = 'content/paraphrase';
+
+const String proofreadTextRoute = 'content/proofread';
+
 const String generateKeywordsRoute = 'content/keywords';
 
 // ---- job status ----
 const String jobStatusRoute = 'job/status';
+
+// ---- subscription info ----
+
+const String quotaRoute = 'quota';
+
+const String pingRoute = 'ping';

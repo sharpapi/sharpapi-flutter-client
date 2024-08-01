@@ -15,9 +15,11 @@ class SharpApiService {
 
   Future<JobModel> _getJobStatusResult({
     required String jobId,
+    required String mainRoute,
   }) async {
     final result = await _repository.getJobStatusResult(
       jobId: jobId,
+      mainRoute: mainRoute,
     );
 
     JobModel jobModel = JobModel();
@@ -37,6 +39,7 @@ class SharpApiService {
 
   Future<T> getJobStatusResult<T>({
     required String jobId,
+    required String mainRoute,
   }) async {
     double waitingTime = 0;
 
@@ -45,22 +48,22 @@ class SharpApiService {
     try {
       JobModel jobModel = await _getJobStatusResult(
         jobId: jobId,
+        mainRoute: mainRoute,
       );
 
       // log('jobModel.result => ${jobModel.status}');
 
-      if (jobModel.status == SharpApiJobStatusEnum.NEW.label ||
-          jobModel.status == SharpApiJobStatusEnum.PENDING.label) {
-
+      if (jobModel.status == SharpApiJobStatusEnum.NEW.label || jobModel.status == SharpApiJobStatusEnum.PENDING.label) {
         waitingTime = waitingTime + SharpApiConfigs.apiJobStatusPollingInterval;
 
-        if(waitingTime >= SharpApiConfigs.apiJobStatusPollingWait) {
+        if (waitingTime >= SharpApiConfigs.apiJobStatusPollingWait) {
           throw SharpApiException('Job status polling timeout!, Please try again.');
         } else {
           await Future.delayed(Duration(seconds: SharpApiConfigs.apiJobStatusPollingInterval.toInt()));
 
           return getJobStatusResult<T>(
             jobId: jobId,
+            mainRoute: mainRoute,
           );
         }
       } else {

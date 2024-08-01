@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:sharpapi_flutter_client/src/content_and_marketing/conent_and_marketing_api_service.dart';
 import 'package:sharpapi_flutter_client/src/content_and_marketing/models/detect_spam_model.dart';
 import 'package:sharpapi_flutter_client/src/content_and_marketing/models/keywords_and_tags_model.dart';
+import 'package:sharpapi_flutter_client/src/content_and_marketing/models/paraphrase_content_model.dart';
 import 'package:sharpapi_flutter_client/src/content_and_marketing/models/phone_model.dart';
+import 'package:sharpapi_flutter_client/src/content_and_marketing/models/proofread_content_model.dart';
 import 'package:sharpapi_flutter_client/src/content_and_marketing/models/summarize_content_model.dart';
 import 'package:sharpapi_flutter_client/src/content_and_marketing/models/translate_text_model.dart';
 import 'package:sharpapi_flutter_client/src/core/di/injection.dart';
@@ -20,6 +22,9 @@ import 'package:sharpapi_flutter_client/src/hr/models/related_job_positions_mode
 import 'package:sharpapi_flutter_client/src/hr/models/related_skills_model.dart';
 import 'package:sharpapi_flutter_client/src/seo/models/generate_seo_tags_model.dart';
 import 'package:sharpapi_flutter_client/src/seo/seo_api_service.dart';
+import 'package:sharpapi_flutter_client/src/subscription_info/models/ping_model.dart';
+import 'package:sharpapi_flutter_client/src/subscription_info/models/quota_model.dart';
+import 'package:sharpapi_flutter_client/src/subscription_info/subscription_info_api_service.dart';
 import 'package:sharpapi_flutter_client/src/travel_tourism_hospitality/travel_tourism_hospitality_api_service.dart';
 
 class SharpApi {
@@ -36,6 +41,8 @@ class SharpApi {
     List<String>? requiredSkills,
     List<String>? optionalSkills,
     String language = 'English',
+    String? voiceTone,
+    String? context,
   }) async {
     GenerateJobDescriptionDto generateJobDescriptionDto = GenerateJobDescriptionDto(
       name: name,
@@ -49,6 +56,8 @@ class SharpApi {
       requiredSkills: requiredSkills,
       optionalSkills: optionalSkills,
       language: language,
+      voiceTone: voiceTone,
+      context: context,
     );
 
     GenerateJobDescriptionModel? generateJobDescriptionModel;
@@ -68,6 +77,7 @@ class SharpApi {
   static Future<RelatedSkillsModel> relatedSkills({
     required String skill,
     String language = 'English',
+    int? maxQuantity,
   }) async {
     RelatedSkillsModel? relatedSkillsModel;
 
@@ -75,6 +85,7 @@ class SharpApi {
       relatedSkillsModel = await sl<HrApiService>().relatedSkills(
         skill: skill,
         language: language,
+        maxQuantity: maxQuantity,
       );
     } catch (error) {
       rethrow;
@@ -87,6 +98,7 @@ class SharpApi {
   static Future<RelatedJobPositionModel> relatedJobPositions({
     required String jobTitle,
     String language = 'English',
+    int? maxQuantity,
   }) async {
     RelatedJobPositionModel? relatedJobPositionModel;
 
@@ -94,6 +106,7 @@ class SharpApi {
       relatedJobPositionModel = await sl<HrApiService>().relatedJobPositions(
         jobTitle: jobTitle,
         language: language,
+        maxQuantity: maxQuantity,
       );
     } catch (error) {
       rethrow;
@@ -144,6 +157,9 @@ class SharpApi {
   static Future<List<CategoryModel>> productCategories({
     required String content,
     String language = 'English',
+    int? maxQuantity,
+    String? voiceTone,
+    String? context,
   }) async {
     List<CategoryModel>? productCategoriesModel;
 
@@ -151,6 +167,9 @@ class SharpApi {
       productCategoriesModel = await sl<ECommerceApiService>().productCategories(
         content: content,
         language: language,
+        maxQuantity: maxQuantity,
+        voiceTone: voiceTone,
+        context: context,
       );
     } catch (error) {
       rethrow;
@@ -163,6 +182,8 @@ class SharpApi {
   static Future<ProductIntroModel> generateProductIntro({
     required String content,
     String language = 'English',
+    int? maxLength,
+    String? voiceTone,
   }) async {
     ProductIntroModel? productIntroModel;
 
@@ -170,6 +191,8 @@ class SharpApi {
       productIntroModel = await sl<ECommerceApiService>().generateProductIntro(
         content: content,
         language: language,
+        maxLength: maxLength,
+        voiceTone: voiceTone,
       );
     } catch (error) {
       rethrow;
@@ -182,6 +205,9 @@ class SharpApi {
   static Future<ThankYouEmailModel> generateThankYouEmail({
     required String content,
     String language = 'English',
+    int? maxLength,
+    String? voiceTone,
+    String? context,
   }) async {
     ThankYouEmailModel? thankYouEmailModel;
 
@@ -189,6 +215,9 @@ class SharpApi {
       thankYouEmailModel = await sl<ECommerceApiService>().generateThankYouEmail(
         content: content,
         language: language,
+        maxLength: maxLength,
+        voiceTone: voiceTone,
+        context: context,
       );
     } catch (error) {
       rethrow;
@@ -201,6 +230,7 @@ class SharpApi {
   static Future<GenerateSeoTagsModel> generateSeoTags({
     required String content,
     String language = 'English',
+    String? voiceTone,
   }) async {
     GenerateSeoTagsModel? generateSeoTagsModel;
 
@@ -208,6 +238,7 @@ class SharpApi {
       generateSeoTagsModel = await sl<SeoApiService>().generateSeoTags(
         content: content,
         language: language,
+        voiceTone: voiceTone,
       );
     } catch (error) {
       rethrow;
@@ -241,6 +272,9 @@ class SharpApi {
     String? country,
     String? city,
     String language = 'English',
+    int? maxQuantity,
+    String? voiceTone,
+    String? context,
   }) async {
     List<CategoryModel>? toursAndActivitiesProductCategoriesModel;
 
@@ -250,6 +284,9 @@ class SharpApi {
         country: country,
         city: city,
         language: language,
+        maxQuantity: maxQuantity,
+        voiceTone: voiceTone,
+        context: context,
       );
     } catch (error) {
       rethrow;
@@ -264,6 +301,9 @@ class SharpApi {
     String? country,
     String? city,
     String language = 'English',
+    int? maxQuantity,
+    String? voiceTone,
+    String? context,
   }) async {
     List<CategoryModel>? hospitalityProductCategoriesModel;
 
@@ -273,6 +313,9 @@ class SharpApi {
         country: country,
         city: city,
         language: language,
+        maxQuantity: maxQuantity,
+        voiceTone: voiceTone,
+        context: context,
       );
     } catch (error) {
       rethrow;
@@ -282,10 +325,11 @@ class SharpApi {
   }
 
   ///*** translate
-
   static Future<TranslateTextModel> translate({
     required String text,
     required String language,
+    String? voiceTone,
+    String? context,
   }) async {
     TranslateTextModel? translateModel;
 
@@ -293,6 +337,8 @@ class SharpApi {
       translateModel = await sl<ContentAndMarketingApiService>().translate(
         text: text,
         language: language,
+        voiceTone: voiceTone,
+        context: context,
       );
     } catch (error) {
       rethrow;
@@ -358,6 +404,8 @@ class SharpApi {
   static Future<SummarizeContentModel> summarizeText({
     required String text,
     String language = 'English',
+    int? maxLength,
+    String? voiceTone,
   }) async {
     SummarizeContentModel? summarizeTextModel;
 
@@ -365,6 +413,8 @@ class SharpApi {
       summarizeTextModel = await sl<ContentAndMarketingApiService>().summarizeText(
         text: text,
         language: language,
+        maxLength: maxLength,
+        voiceTone: voiceTone,
       );
     } catch (error) {
       rethrow;
@@ -373,11 +423,53 @@ class SharpApi {
     return summarizeTextModel;
   }
 
-  ///*** generate keywords
+  ///*** paraphrase text
+  static Future<ParaphraseContentModel> paraphrase({
+    required String text,
+    String language = 'English',
+    String? voiceTone,
+    int? maxLength,
+    String? context,
+  }) async {
+    ParaphraseContentModel? paraphraseContentModel;
 
+    try {
+      paraphraseContentModel = await sl<ContentAndMarketingApiService>().paraphraseText(
+        text: text,
+        language: language,
+        voiceTone: voiceTone,
+        maxLength: maxLength,
+        context: context,
+      );
+    } catch (error) {
+      rethrow;
+    }
+
+    return paraphraseContentModel;
+  }
+
+  ///*** proofread text
+  static Future<ProofreadContentModel> proofread({
+    required String text,
+  }) async {
+    ProofreadContentModel? proofreadContentModel;
+
+    try {
+      proofreadContentModel = await sl<ContentAndMarketingApiService>().proofreadText(
+        content: text,
+      );
+    } catch (error) {
+      rethrow;
+    }
+
+    return proofreadContentModel;
+  }
+
+  ///*** generate keywords
   static Future<KeywordsAndTagsModel> generateKeywords({
     required String text,
     String language = 'English',
+    String? voiceTone,
   }) async {
     KeywordsAndTagsModel? generateKeywordsModel;
 
@@ -385,11 +477,38 @@ class SharpApi {
       generateKeywordsModel = await sl<ContentAndMarketingApiService>().generateKeywords(
         text: text,
         language: language,
+        voiceTone: voiceTone,
       );
     } catch (error) {
       rethrow;
     }
 
     return generateKeywordsModel;
+  }
+
+  ///*** quota
+  static Future<QuotaModel> quota() async {
+    QuotaModel? quotaModel;
+
+    try {
+      quotaModel = await sl<SubscriptionInfoApiService>().quota();
+    } catch (error) {
+      rethrow;
+    }
+
+    return quotaModel;
+  }
+
+  ///*** ping
+  static Future<PingModel> ping() async {
+    PingModel? pingModel;
+
+    try {
+      pingModel = await sl<SubscriptionInfoApiService>().ping();
+    } catch (error) {
+      rethrow;
+    }
+
+    return pingModel;
   }
 }

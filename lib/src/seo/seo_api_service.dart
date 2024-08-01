@@ -1,6 +1,7 @@
 import 'package:sharpapi_flutter_client/src/core/SharpApiService.dart';
 import 'package:sharpapi_flutter_client/src/core/error/exceptions.dart';
 import 'package:sharpapi_flutter_client/src/core/models/general_model.dart';
+import 'package:sharpapi_flutter_client/src/core/network/remote/api_endpoints.dart';
 import 'package:sharpapi_flutter_client/src/core/network/repository.dart';
 import 'package:sharpapi_flutter_client/src/seo/models/generate_seo_tags_model.dart';
 
@@ -18,10 +19,12 @@ class SeoApiService {
   Future<GeneralModel> _generateSeoTags({
     required String content,
     required String language,
+    String? voiceTone,
   }) async {
     final result = await _repository.generateSeoTags(
       content: content,
       language: language,
+      voiceTone: voiceTone,
     );
 
     GeneralModel generateJobDescriptionModel = GeneralModel();
@@ -44,6 +47,7 @@ class SeoApiService {
   Future<GenerateSeoTagsModel> generateSeoTags({
     required String content,
     required String language,
+    String? voiceTone,
   }) async {
     GeneralModel? generalModel;
 
@@ -51,6 +55,7 @@ class SeoApiService {
       generalModel = await _generateSeoTags(
         content: content,
         language: language,
+          voiceTone: voiceTone,
       );
     } catch (error) {
       rethrow;
@@ -60,7 +65,8 @@ class SeoApiService {
 
     try {
       Map<String, dynamic> result = await _sharpApiService.getJobStatusResult<Map<String, dynamic>>(
-        jobId: generalModel.statusUrl != null ? generalModel.statusUrl!.split('status/').last : '',
+        jobId: generalModel.jobId ?? '',
+        mainRoute: generateSeoTagsRoute,
       );
 
       generateSeoTagsModel = GenerateSeoTagsModel.fromJson(result);

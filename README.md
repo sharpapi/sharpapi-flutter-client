@@ -242,6 +242,49 @@ so you can personalize the rest of the email easily.
 
 ### Content
 
+#### Paraphrase / Rephrase Text
+
+Generates a paraphrased version of the provided text.
+Only the `content` parameter is required. You can define the output language,
+maximum character length, and tone of voice.
+
+Additional instructions on how to process the text can be provided in the context parameter.
+Please keep in mind that `max_length` serves as a strong suggestion
+for the Language Model, rather than a strict requirement,
+to maintain the general sense of the outcome.
+
+You can set your preferred writing style by providing an optional `voice_tone` parameter.
+It can be adjectives like `funny` or `joyous`, or even the name of a famous writer.
+
+This API method also provides an optional `context` parameter,
+which can be used to supply additional flexible instructions for content processing.
+
+```dart
+  ///*** paraphrase text
+  SharpApi.paraphrase(
+    text: 'ANY_TEXT',
+  ).then((value) {
+    /// do something with the [value] here
+  }).catchError((error) {
+    /// do something with the [error] here
+  });
+```
+
+#### Proofread Text + Grammar Check
+
+Proofreads (and checks grammar) a provided text.
+
+```dart
+  ///*** proofread text
+  SharpApi.proofread(
+    text: 'ANY_TEXT',
+  ).then((value) {
+    /// do something with the [value] here
+  }).catchError((error) {
+    /// do something with the [error] here
+  });
+```
+
 #### Translate Text
 
 Translates provided text to selected language. 80 languages are supported.
@@ -420,6 +463,64 @@ Only first parameter `productName` is required.
     /// do something with the [error] here
   });
 ```
+
+### 🤖 Technical API Endpoints
+
+#### Subscription information / quota check
+Endpoint to check details regarding the subscription's current period
+
+```dart
+  ///*** quota
+  SharpApi.quota().then((value) {
+    /// do something with the [value] here
+  }).catchError((error) {
+    /// do something with the [error] here
+  });
+```
+
+will result in:
+```json
+{
+    "timestamp": "2024-03-19T12:49:41.445736Z",
+    "on_trial": false,
+    "trial_ends": "2024-03-17T07:57:46.000000Z",
+    "subscribed": true,
+    "current_subscription_start": "2024-03-18T12:37:39.000000Z",
+    "current_subscription_end": "2024-04-18T12:37:39.000000Z",
+    "subscription_words_quota": 100000,
+    "subscription_words_used": 9608,
+    "subscription_words_used_percentage": 0.1
+}
+```
+
+`subscription_words_used_percentage` is a percentage of current monthly quota usage
+and might serve as an alert to the user of the depleted credits.
+With a value above 80%, it's advised to subscribe to more credits
+at https://sharpapi.com/dashboard/credits to avoid service disruption.
+
+These values are also available in the Dashboard at https://sharpapi.com/dashboard
+
+#### Ping
+Simple PING endpoint to check the availability of the API and it's internal timze zone (timestamp).
+
+```dart
+  ///*** ping
+  SharpApi.ping().then((value) {
+    /// do something with the [value] here
+  }).catchError((error) {
+    /// do something with the [error] here
+  });
+```
+
+will result in:
+```json
+{
+  "ping": "pong",
+  "timestamp": "2024-03-12T08:50:11.188308Z"
+}
+```
+
+---
 
 ### Do you think our API is missing some obvious functionality?
 

@@ -60,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
+                // SharpAPI For Hr
                 SizedBox(
                   width: double.infinity,
                   child: Column(
@@ -121,6 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
                 const SizedBox(height: 16.0),
+
+                // SharpAPI For E-commerce
                 SizedBox(
                   width: double.infinity,
                   child: Column(
@@ -182,6 +185,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
                 const SizedBox(height: 16.0),
+
+                // SharpAPI For SEO
                 SizedBox(
                   width: double.infinity,
                   child: Column(
@@ -219,6 +224,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
                 const SizedBox(height: 16.0),
+
+                // SharpAPI For Travel, Tourism & Hospitality
                 SizedBox(
                   width: double.infinity,
                   child: Column(
@@ -272,6 +279,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
                 const SizedBox(height: 16.0),
+
+                // SharpAPI For Content & Marketing Automation
                 SizedBox(
                   width: double.infinity,
                   child: Column(
@@ -337,6 +346,69 @@ class _MyHomePageState extends State<MyHomePage> {
                                     generateKeywords();
                                   },
                           ),
+                          PrimaryElevatedButton(
+                            title: 'Paraphrase Text',
+                            onPressed: isJobStatusPolling
+                                ? null
+                                : () {
+                              paraphrase();
+                            },
+                          ),
+                          PrimaryElevatedButton(
+                            title: 'Proofread Text',
+                            onPressed: isJobStatusPolling
+                                ? null
+                                : () {
+                              proofread();
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16.0),
+                Container(
+                  width: double.infinity,
+                  height: 1.0,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+                const SizedBox(height: 16.0),
+
+                // subscription info
+                SizedBox(
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Subscription Info',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 16.0),
+                      Wrap(
+                        spacing: 8.0,
+                        runSpacing: 8.0,
+                        children: [
+                          PrimaryElevatedButton(
+                            title: 'Quota',
+                            onPressed: isJobStatusPolling
+                                ? null
+                                : () {
+                              quota();
+                            },
+                          ),
+                          PrimaryElevatedButton(
+                            title: 'Ping',
+                            onPressed: isJobStatusPolling
+                                ? null
+                                : () {
+                              ping();
+                            },
+                          ),
                         ],
                       ),
                     ],
@@ -352,6 +424,38 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void snippet() async {
+    ///*** quota
+    SharpApi.quota().then((value) {
+      /// do something with the [value] here
+    }).catchError((error) {
+      /// do something with the [error] here
+    });
+
+    ///*** ping
+    SharpApi.ping().then((value) {
+      /// do something with the [value] here
+    }).catchError((error) {
+      /// do something with the [error] here
+    });
+
+    ///*** paraphrase text
+    SharpApi.paraphrase(
+      text: "Red Bull's Max Verstappen says this weekend's Las Vegas Grand Prix is \"99% show and 1% sporting event\". \n\n The triple world champion said he is \"not looking forward\" to the razzmatazz around the race, the first time Formula 1 cars have raced down the city's famous Strip. \n\n Other leading drivers were more equivocal about the hype.\n\n Aston Martin's Fernando Alonso said: \"With the investment that has been made and the place we are racing, it deserves a little bit [of] different treatment and extra show.\" \n\n The weekend was kick-started on Wednesday evening with a lavish opening ceremony.\n\n It featured performances from several music stars, including Kylie Minogue and Journey, and culminated in the drivers being introduced to a sparsely populated crowd in light rain by being lifted into view on hydraulic platforms under a sound-and-light show. \n\n Lewis Hamilton said: \"It's amazing to be here. It is exciting - such an incredible place, so many lights, a great energy, a great buzz. \n\n \"This is one of the most iconic cities there is. It is a big show, for sure. It is never going to be like Silverstone [in terms of history and purity]. But maybe over time the people in the community here will grow to love the sport.\" \n\n Hamilton added: \"It is a business, ultimately. You'll still see good racing here. \n\n \"Maybe the track will be good, maybe it will be bad. It was so-so on the [simulator]. Don't knock it 'til you try it. I hear there are a lot of people complaining about the direction [F1 president] Stefano [Domenicali] and [owners] Liberty have been going [but] I think they have been doing an amazing job b.\"",
+    ).then((value) {
+      /// do something with the [value] here
+    }).catchError((error) {
+      /// do something with the [error] here
+    });
+
+    ///*** proofread text
+    SharpApi.proofread(
+      text: "Red Bull's Max Verstappen says this weekend's Las Vegas Grand Prix is \"99% show and 1% sporting event\". \n\n The triple world champion said he is \"not looking forward\" to the razzmatazz around the race, the first time Formula 1 cars have raced down the city's famous Strip. \n\n Other leading drivers were more equivocal about the hype.\n\n Aston Martin's Fernando Alonso said: \"With the investment that has been made and the place we are racing, it deserves a little bit [of] different treatment and extra show.\" \n\n The weekend was kick-started on Wednesday evening with a lavish opening ceremony.\n\n It featured performances from several music stars, including Kylie Minogue and Journey, and culminated in the drivers being introduced to a sparsely populated crowd in light rain by being lifted into view on hydraulic platforms under a sound-and-light show. \n\n Lewis Hamilton said: \"It's amazing to be here. It is exciting - such an incredible place, so many lights, a great energy, a great buzz. \n\n \"This is one of the most iconic cities there is. It is a big show, for sure. It is never going to be like Silverstone [in terms of history and purity]. But maybe over time the people in the community here will grow to love the sport.\" \n\n Hamilton added: \"It is a business, ultimately. You'll still see good racing here. \n\n \"Maybe the track will be good, maybe it will be bad. It was so-so on the [simulator]. Don't knock it 'til you try it. I hear there are a lot of people complaining about the direction [F1 president] Stefano [Domenicali] and [owners] Liberty have been going [but] I think they have been doing an amazing job b.\"",
+    ).then((value) {
+      /// do something with the [value] here
+    }).catchError((error) {
+      /// do something with the [error] here
+    });
+
     ///*** generate job description
     SharpApi.generateJobDescription(
       name: 'ANY_JOB_TITLE',
@@ -1254,6 +1358,146 @@ class _MyHomePageState extends State<MyHomePage> {
         debugPrint('keyword: ${element.toString()}');
         debugPrint('-----------------');
       });
+    }).catchError((e) {
+      setState(() {
+        isJobStatusPolling = false;
+      });
+
+      debugPrint('error ==>> ${e.message}');
+
+      displayErrorSnackBar(
+        message: e.message,
+      );
+    });
+  }
+
+  void paraphrase() async {
+    setState(() {
+      isJobStatusPolling = true;
+    });
+
+    SharpApi.paraphrase(
+      text: "Red Bull's Max Verstappen says this weekend's Las Vegas Grand Prix is \"99% show and 1% sporting event\". \n\n The triple world champion said he is \"not looking forward\" to the razzmatazz around the race, the first time Formula 1 cars have raced down the city's famous Strip. \n\n Other leading drivers were more equivocal about the hype.\n\n Aston Martin's Fernando Alonso said: \"With the investment that has been made and the place we are racing, it deserves a little bit [of] different treatment and extra show.\" \n\n The weekend was kick-started on Wednesday evening with a lavish opening ceremony.\n\n It featured performances from several music stars, including Kylie Minogue and Journey, and culminated in the drivers being introduced to a sparsely populated crowd in light rain by being lifted into view on hydraulic platforms under a sound-and-light show. \n\n Lewis Hamilton said: \"It's amazing to be here. It is exciting - such an incredible place, so many lights, a great energy, a great buzz. \n\n \"This is one of the most iconic cities there is. It is a big show, for sure. It is never going to be like Silverstone [in terms of history and purity]. But maybe over time the people in the community here will grow to love the sport.\" \n\n Hamilton added: \"It is a business, ultimately. You'll still see good racing here. \n\n \"Maybe the track will be good, maybe it will be bad. It was so-so on the [simulator]. Don't knock it 'til you try it. I hear there are a lot of people complaining about the direction [F1 president] Stefano [Domenicali] and [owners] Liberty have been going [but] I think they have been doing an amazing job b.\"",
+    ).then((value) {
+      setState(() {
+        isJobStatusPolling = false;
+      });
+
+      displaySuccessSnackBar();
+
+      debugPrint('***** Paraphrase *****');
+      debugPrint(value.paraphrase);
+    }).catchError((e) {
+      setState(() {
+        isJobStatusPolling = false;
+      });
+
+      debugPrint('error ==>> ${e.message}');
+
+      displayErrorSnackBar(
+        message: e.message,
+      );
+    });
+  }
+
+  void proofread() async {
+    setState(() {
+      isJobStatusPolling = true;
+    });
+
+    SharpApi.proofread(
+      text: "Red Bull's Max Verstappen says this weekend's Las Vegas Grand Prix is \"99% show and 1% sporting event\". \n\n The triple world champion said he is \"not looking forward\" to the razzmatazz around the race, the first time Formula 1 cars have raced down the city's famous Strip. \n\n Other leading drivers were more equivocal about the hype.\n\n Aston Martin's Fernando Alonso said: \"With the investment that has been made and the place we are racing, it deserves a little bit [of] different treatment and extra show.\" \n\n The weekend was kick-started on Wednesday evening with a lavish opening ceremony.\n\n It featured performances from several music stars, including Kylie Minogue and Journey, and culminated in the drivers being introduced to a sparsely populated crowd in rain by being lifted into view on hydraulic platforms under a sound-and-light show. \n\n Lewis Hamilton said: \"It's amazing to be here. It is exciting - such an incredible place, so many lights, a great energy, a great buzz. \n\n \"This is one of the most iconic cities there is.  It is a big show, for sure. It is never going to be like Silverstone [in terms of history and purity]. But maybe over time the people in the community here will grow to love the sport.\" \n\n Hamilton added: \"It is a business, ultimately. You'll still see good racing here. \n\n \"Maybe the  track will be good, maybe it will be bad. It was so-so on the [simulator]. Don't knock it 'til you try it. I hear there are a lot of people complaining about the direction [F1 president] Stefano [Domenicali] and [owners] Liberty have been going [but] I think they have been doing an amazing job.\"",
+    ).then((value) {
+      setState(() {
+        isJobStatusPolling = false;
+      });
+
+      displaySuccessSnackBar();
+
+      debugPrint('***** Proofread *****');
+      debugPrint(value.proofread);
+    }).catchError((e) {
+      setState(() {
+        isJobStatusPolling = false;
+      });
+
+      debugPrint('error ==>> ${e.message}');
+
+      displayErrorSnackBar(
+        message: e.message,
+      );
+    });
+  }
+
+  // subscription info
+  void quota() async {
+    setState(() {
+      isJobStatusPolling = true;
+    });
+
+    SharpApi.quota().then((value) {
+      setState(() {
+        isJobStatusPolling = false;
+      });
+
+      displaySuccessSnackBar();
+
+      debugPrint('***** Timestamp *****');
+      debugPrint(value.timestamp);
+
+      debugPrint('***** Subscription Words Quota *****');
+      debugPrint(value.subscriptionWordsQuota.toString());
+
+      debugPrint('***** Subscription Words Used *****');
+      debugPrint(value.subscriptionWordsUsed.toString());
+
+      debugPrint('***** Subscription Words Used Percentage *****');
+      debugPrint(value.subscriptionWordsUsedPercentage.toString());
+
+      debugPrint('***** On Trial *****');
+      debugPrint(value.onTrial.toString());
+
+      debugPrint('***** Trial Ends *****');
+      debugPrint(value.trialEnds);
+
+      debugPrint('***** Subscribed *****');
+      debugPrint(value.subscribed.toString());
+
+      debugPrint('***** Current Subscription Start *****');
+      debugPrint(value.currentSubscriptionStart);
+
+      debugPrint('***** Current Subscription End *****');
+      debugPrint(value.currentSubscriptionEnd);
+    }).catchError((e) {
+      setState(() {
+        isJobStatusPolling = false;
+      });
+
+      debugPrint('error ==>> ${e.message}');
+
+      displayErrorSnackBar(
+        message: e.message,
+      );
+    });
+  }
+
+  void ping() async {
+    setState(() {
+      isJobStatusPolling = true;
+    });
+
+    SharpApi.ping().then((value) {
+      setState(() {
+        isJobStatusPolling = false;
+      });
+
+      displaySuccessSnackBar();
+
+      debugPrint('***** Timestamp *****');
+      debugPrint(value.timestamp);
+
+      debugPrint('***** Ping *****');
+      debugPrint(value.ping);
     }).catchError((e) {
       setState(() {
         isJobStatusPolling = false;

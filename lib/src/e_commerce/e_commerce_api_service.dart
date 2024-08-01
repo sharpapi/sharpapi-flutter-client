@@ -3,6 +3,7 @@ import 'package:sharpapi_flutter_client/src/core/error/exceptions.dart';
 import 'package:sharpapi_flutter_client/src/core/models/category_model.dart';
 import 'package:sharpapi_flutter_client/src/core/models/general_model.dart';
 import 'package:sharpapi_flutter_client/src/core/models/review_sentiment_model.dart';
+import 'package:sharpapi_flutter_client/src/core/network/remote/api_endpoints.dart';
 import 'package:sharpapi_flutter_client/src/core/network/repository.dart';
 import 'package:sharpapi_flutter_client/src/e_commerce/models/product_intro_model.dart';
 import 'package:sharpapi_flutter_client/src/e_commerce/models/thank_you_email_model.dart';
@@ -63,7 +64,8 @@ class ECommerceApiService {
 
     try {
       Map<String, dynamic> result = await _sharpApiService.getJobStatusResult<Map<String, dynamic>>(
-        jobId: generalModel.statusUrl != null ? generalModel.statusUrl!.split('status/').last : '',
+        jobId: generalModel.jobId ?? '',
+        mainRoute: productReviewSentimentRoute,
       );
 
       productReviewModel = ReviewSentimentModel.fromJson(result);
@@ -80,10 +82,16 @@ class ECommerceApiService {
   Future<GeneralModel> _productCategories({
     required String content,
     required String language,
+    int? maxQuantity,
+    String? voiceTone,
+    String? context,
   }) async {
     final result = await _repository.productCategories(
       content: content,
       language: language,
+      maxQuantity: maxQuantity,
+      voiceTone: voiceTone,
+      context: context,
     );
 
     GeneralModel generalModel = GeneralModel();
@@ -106,6 +114,9 @@ class ECommerceApiService {
   Future<List<CategoryModel>> productCategories({
     required String content,
     required String language,
+    int? maxQuantity,
+    String? voiceTone,
+    String? context,
   }) async {
     GeneralModel? generalModel;
 
@@ -113,6 +124,9 @@ class ECommerceApiService {
       generalModel = await _productCategories(
         content: content,
         language: language,
+        maxQuantity: maxQuantity,
+        voiceTone: voiceTone,
+        context: context,
       );
     } catch (error) {
       rethrow;
@@ -122,7 +136,8 @@ class ECommerceApiService {
 
     try {
       List result = await _sharpApiService.getJobStatusResult<List>(
-        jobId: generalModel.statusUrl != null ? generalModel.statusUrl!.split('status/').last : '',
+        jobId: generalModel.jobId ?? '',
+        mainRoute: productCategoriesRoute,
       );
 
       productCategoriesModel = (result).map((e) => CategoryModel.fromJson(e)).toList();
@@ -139,10 +154,14 @@ class ECommerceApiService {
   Future<GeneralModel> _generateProductIntro({
     required String content,
     required String language,
+    int? maxLength,
+    String? voiceTone,
   }) async {
     final result = await _repository.generateProductIntro(
       content: content,
       language: language,
+      maxLength: maxLength,
+      voiceTone: voiceTone,
     );
 
     GeneralModel generalModel = GeneralModel();
@@ -165,6 +184,8 @@ class ECommerceApiService {
   Future<ProductIntroModel> generateProductIntro({
     required String content,
     required String language,
+    int? maxLength,
+    String? voiceTone,
   }) async {
     GeneralModel? generalModel;
 
@@ -172,6 +193,8 @@ class ECommerceApiService {
       generalModel = await _generateProductIntro(
         content: content,
         language: language,
+        maxLength: maxLength,
+        voiceTone: voiceTone,
       );
     } catch (error) {
       rethrow;
@@ -181,7 +204,8 @@ class ECommerceApiService {
 
     try {
       Map<String, dynamic> result = await _sharpApiService.getJobStatusResult<Map<String, dynamic>>(
-        jobId: generalModel.statusUrl != null ? generalModel.statusUrl!.split('status/').last : '',
+        jobId: generalModel.jobId ?? '',
+        mainRoute: generateProductIntroRoute,
       );
 
       productIntroModel = ProductIntroModel.fromJson(result);
@@ -198,10 +222,16 @@ class ECommerceApiService {
   Future<GeneralModel> _generateThankYouEmail({
     required String content,
     required String language,
+    int? maxLength,
+    String? voiceTone,
+    String? context,
   }) async {
     final result = await _repository.generateThankYouEmail(
       content: content,
       language: language,
+      maxLength: maxLength,
+      voiceTone: voiceTone,
+      context: context,
     );
 
     GeneralModel generalModel = GeneralModel();
@@ -224,6 +254,9 @@ class ECommerceApiService {
   Future<ThankYouEmailModel> generateThankYouEmail({
     required String content,
     required String language,
+    int? maxLength,
+    String? voiceTone,
+    String? context,
   }) async {
     GeneralModel? generalModel;
 
@@ -231,6 +264,9 @@ class ECommerceApiService {
       generalModel = await _generateThankYouEmail(
         content: content,
         language: language,
+        maxLength: maxLength,
+        voiceTone: voiceTone,
+        context: context,
       );
     } catch (error) {
       rethrow;
@@ -240,7 +276,8 @@ class ECommerceApiService {
 
     try {
       Map<String, dynamic> result = await _sharpApiService.getJobStatusResult<Map<String, dynamic>>(
-        jobId: generalModel.statusUrl != null ? generalModel.statusUrl!.split('status/').last : '',
+        jobId: generalModel.jobId ?? '',
+        mainRoute: generateThankYouEmailRoute,
       );
 
       thankYouEmailModel = ThankYouEmailModel.fromJson(result);
