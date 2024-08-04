@@ -263,6 +263,10 @@ which can be used to supply additional flexible instructions for content process
   ///*** paraphrase text
   SharpApi.paraphrase(
     text: 'ANY_TEXT',
+    language: SharpApiLanguages.ENGLISH,   // optional language
+    maxLength: 500,                        // optional length
+    voiceTone: 'neutral',                  // optional voice tone
+    context: 'avoid using abbreviations',  // optional context
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {

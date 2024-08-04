@@ -441,6 +441,10 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** paraphrase text
     SharpApi.paraphrase(
       text: "Red Bull's Max Verstappen says this weekend's Las Vegas Grand Prix is \"99% show and 1% sporting event\". \n\n The triple world champion said he is \"not looking forward\" to the razzmatazz around the race, the first time Formula 1 cars have raced down the city's famous Strip. \n\n Other leading drivers were more equivocal about the hype.\n\n Aston Martin's Fernando Alonso said: \"With the investment that has been made and the place we are racing, it deserves a little bit [of] different treatment and extra show.\" \n\n The weekend was kick-started on Wednesday evening with a lavish opening ceremony.\n\n It featured performances from several music stars, including Kylie Minogue and Journey, and culminated in the drivers being introduced to a sparsely populated crowd in light rain by being lifted into view on hydraulic platforms under a sound-and-light show. \n\n Lewis Hamilton said: \"It's amazing to be here. It is exciting - such an incredible place, so many lights, a great energy, a great buzz. \n\n \"This is one of the most iconic cities there is. It is a big show, for sure. It is never going to be like Silverstone [in terms of history and purity]. But maybe over time the people in the community here will grow to love the sport.\" \n\n Hamilton added: \"It is a business, ultimately. You'll still see good racing here. \n\n \"Maybe the track will be good, maybe it will be bad. It was so-so on the [simulator]. Don't knock it 'til you try it. I hear there are a lot of people complaining about the direction [F1 president] Stefano [Domenicali] and [owners] Liberty have been going [but] I think they have been doing an amazing job b.\"",
+      language: SharpApiLanguages.ENGLISH,   // optional language
+      maxLength: 500,                        // optional length
+      voiceTone: 'neutral',                  // optional voice tone
+      context: 'avoid using abbreviations',  // optional context
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
