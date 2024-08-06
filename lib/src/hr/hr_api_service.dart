@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:sharpapi_flutter_client/src/core/SharpApiService.dart';
 import 'package:sharpapi_flutter_client/src/core/error/exceptions.dart';
 import 'package:sharpapi_flutter_client/src/core/models/general_model.dart';
+import 'package:sharpapi_flutter_client/src/core/network/remote/api_endpoints.dart';
 import 'package:sharpapi_flutter_client/src/core/network/repository.dart';
 import 'package:sharpapi_flutter_client/src/hr/dto/generate_job_description_dto.dart';
 import 'package:sharpapi_flutter_client/src/hr/models/generate_job_description_model.dart';
@@ -60,7 +61,8 @@ class HrApiService {
 
     try {
       Map<String, dynamic> result = await _sharpApiService.getJobStatusResult<Map<String, dynamic>>(
-        jobId: generalModel.statusUrl != null ? generalModel.statusUrl!.split('status/').last : '',
+        jobId: generalModel.jobId ?? '',
+        mainRoute: generateJobDescriptionRoute,
       );
 
       generateJobDescriptionModel = GenerateJobDescriptionModel.fromJson(result);
@@ -77,10 +79,12 @@ class HrApiService {
   Future<GeneralModel> _relatedSkills({
     required String skill,
     required String language,
+    int? maxQuantity,
   }) async {
     final result = await _repository.relatedSkills(
       skill: skill,
       language: language,
+      maxQuantity: maxQuantity,
     );
 
     GeneralModel generalModel = GeneralModel();
@@ -103,6 +107,7 @@ class HrApiService {
   Future<RelatedSkillsModel> relatedSkills({
     required String skill,
     required String language,
+    int? maxQuantity,
   }) async {
     GeneralModel? generalModel;
 
@@ -110,6 +115,7 @@ class HrApiService {
       generalModel = await _relatedSkills(
         skill: skill,
         language: language,
+        maxQuantity: maxQuantity,
       );
     } catch (error) {
       rethrow;
@@ -119,7 +125,8 @@ class HrApiService {
 
     try {
       Map<String, dynamic> result = await _sharpApiService.getJobStatusResult<Map<String, dynamic>>(
-        jobId: generalModel.statusUrl != null ? generalModel.statusUrl!.split('status/').last : '',
+        jobId: generalModel.jobId ?? '',
+        mainRoute: relatedSkillsRoute,
       );
 
       relatedSkillsModel = RelatedSkillsModel.fromJson(result);
@@ -136,10 +143,12 @@ class HrApiService {
   Future<GeneralModel> _relatedJobPositions({
     required String jobTitle,
     required String language,
+    int? maxQuantity,
   }) async {
     final result = await _repository.relatedJobPositions(
       jobTitle: jobTitle,
       language: language,
+      maxQuantity: maxQuantity,
     );
 
     GeneralModel generalModel = GeneralModel();
@@ -162,6 +171,7 @@ class HrApiService {
   Future<RelatedJobPositionModel> relatedJobPositions({
     required String jobTitle,
     required String language,
+    int? maxQuantity,
   }) async {
     GeneralModel? generalModel;
 
@@ -169,26 +179,28 @@ class HrApiService {
       generalModel = await _relatedJobPositions(
         jobTitle: jobTitle,
         language: language,
+        maxQuantity: maxQuantity,
       );
     } catch (error) {
       rethrow;
     }
 
-    RelatedJobPositionModel? relatedSkillsModel;
+    RelatedJobPositionModel? relatedJobPositionModel;
 
     try {
       Map<String, dynamic> result = await _sharpApiService.getJobStatusResult<Map<String, dynamic>>(
-        jobId: generalModel.statusUrl != null ? generalModel.statusUrl!.split('status/').last : '',
+        jobId: generalModel.jobId ?? '',
+        mainRoute: relatedJobPositionsRoute,
       );
 
-      relatedSkillsModel = RelatedJobPositionModel.fromJson(result);
+      relatedJobPositionModel = RelatedJobPositionModel.fromJson(result);
     } catch (error) {
       // log('error => $error');
 
       rethrow;
     }
 
-    return relatedSkillsModel;
+    return relatedJobPositionModel;
   }
 
   ///*** parse resume
@@ -237,7 +249,8 @@ class HrApiService {
 
     try {
       Map<String, dynamic> result = await _sharpApiService.getJobStatusResult<Map<String, dynamic>>(
-        jobId: generalModel.statusUrl != null ? generalModel.statusUrl!.split('status/').last : '',
+        jobId: generalModel.jobId ?? '',
+        mainRoute: parseResumeRoute,
       );
 
       parseResumeModel = ParseResumeModel.fromJson(result);

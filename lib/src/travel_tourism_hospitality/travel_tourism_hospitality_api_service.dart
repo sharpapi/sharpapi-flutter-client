@@ -3,6 +3,7 @@ import 'package:sharpapi_flutter_client/src/core/error/exceptions.dart';
 import 'package:sharpapi_flutter_client/src/core/models/category_model.dart';
 import 'package:sharpapi_flutter_client/src/core/models/general_model.dart';
 import 'package:sharpapi_flutter_client/src/core/models/review_sentiment_model.dart';
+import 'package:sharpapi_flutter_client/src/core/network/remote/api_endpoints.dart';
 import 'package:sharpapi_flutter_client/src/core/network/repository.dart';
 
 class TravelTourismHospitalityApiService {
@@ -61,7 +62,8 @@ class TravelTourismHospitalityApiService {
 
     try {
       Map<String, dynamic> result = await _sharpApiService.getJobStatusResult<Map<String, dynamic>>(
-        jobId: generalModel.statusUrl != null ? generalModel.statusUrl!.split('status/').last : '',
+        jobId: generalModel.jobId ?? '',
+        mainRoute: travelReviewSentimentRoute,
       );
 
       travelReviewSentimentModel = ReviewSentimentModel.fromJson(result);
@@ -80,12 +82,18 @@ class TravelTourismHospitalityApiService {
     String? city,
     String? country,
     required String language,
+    int? maxQuantity,
+    String? voiceTone,
+    String? context,
   }) async {
     final result = await _repository.toursAndActivitiesProductCategories(
       content: content,
       city: city,
       country: country,
       language: language,
+      maxQuantity: maxQuantity,
+      voiceTone: voiceTone,
+      context: context,
     );
 
     GeneralModel generateJobDescriptionModel = GeneralModel();
@@ -110,6 +118,9 @@ class TravelTourismHospitalityApiService {
     String? city,
     String? country,
     required String language,
+    int? maxQuantity,
+    String? voiceTone,
+    String? context,
   }) async {
     GeneralModel? generalModel;
 
@@ -119,6 +130,9 @@ class TravelTourismHospitalityApiService {
         city: city,
         country: country,
         language: language,
+        maxQuantity: maxQuantity,
+        voiceTone: voiceTone,
+        context: context,
       );
     } catch (error) {
       rethrow;
@@ -128,7 +142,8 @@ class TravelTourismHospitalityApiService {
 
     try {
       List result = await _sharpApiService.getJobStatusResult<List>(
-        jobId: generalModel.statusUrl != null ? generalModel.statusUrl!.split('status/').last : '',
+        jobId: generalModel.jobId ?? '',
+        mainRoute: toursAndActivitiesProductCategoriesRoute,
       );
 
       toursAndActivitiesProductCategoriesModel = result.map((e) => CategoryModel.fromJson(e)).toList();
@@ -147,12 +162,18 @@ class TravelTourismHospitalityApiService {
     String? city,
     String? country,
     required String language,
+    int? maxQuantity,
+    String? voiceTone,
+    String? context,
   }) async {
     final result = await _repository.hospitalityProductCategories(
       content: content,
       city: city,
       country: country,
       language: language,
+      maxQuantity: maxQuantity,
+      voiceTone: voiceTone,
+      context: context,
     );
 
     GeneralModel generateJobDescriptionModel = GeneralModel();
@@ -177,6 +198,9 @@ class TravelTourismHospitalityApiService {
     String? city,
     String? country,
     required String language,
+    int? maxQuantity,
+    String? voiceTone,
+    String? context,
   }) async {
     GeneralModel? generalModel;
 
@@ -186,6 +210,9 @@ class TravelTourismHospitalityApiService {
         city: city,
         country: country,
         language: language,
+        maxQuantity: maxQuantity,
+        voiceTone: voiceTone,
+        context: context,
       );
     } catch (error) {
       rethrow;
@@ -195,7 +222,8 @@ class TravelTourismHospitalityApiService {
 
     try {
       List result = await _sharpApiService.getJobStatusResult<List>(
-        jobId: generalModel.statusUrl != null ? generalModel.statusUrl!.split('status/').last : '',
+        jobId: generalModel.jobId ?? '',
+        mainRoute: hospitalityProductCategoriesRoute,
       );
 
       hospitalityProductCategoriesModel = result.map((e) => CategoryModel.fromJson(e)).toList();

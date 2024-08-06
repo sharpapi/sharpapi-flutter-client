@@ -1,16 +1,16 @@
 name: sharpapi_flutter_client
 description: AI-Powered Swiss Army Knife API for every software developer.
-version: 1.0.0
+version: 1.2.0
 repository: https://github.com/sharpapi/sharpapi-flutter-client
 
 environment:
   sdk: ^3.2.6
 
 dependencies:
-  dio: ^5.4.1
+  dio: ^5.5.0+1
   dartz: ^0.10.1
-  get_it: ^7.6.7
+  get_it: ^7.7.0
 
 dev_dependencies:
-  lints: ^3.0.0
+  lints: ^4.0.0
   test: ^1.25.2

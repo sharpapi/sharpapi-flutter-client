@@ -10,6 +10,8 @@ class GenerateJobDescriptionDto {
   List<String>? requiredSkills;
   List<String>? optionalSkills;
   String language;
+  String? voiceTone;
+  String? context;
 
   GenerateJobDescriptionDto({
     required this.name,
@@ -23,6 +25,8 @@ class GenerateJobDescriptionDto {
     this.requiredSkills,
     this.optionalSkills,
     this.language = 'English',
+    this.voiceTone,
+    this.context,
   });
 
   Map<String, dynamic> toJson() => {
@@ -37,5 +41,7 @@ class GenerateJobDescriptionDto {
     if(requiredSkills != null) 'required_skills': requiredSkills,
     if(optionalSkills != null) 'optional_skills': optionalSkills,
     'language': language,
+    if(voiceTone != null) 'voice_tone': voiceTone,
+    if(context != null) 'context': context,
   };
 }

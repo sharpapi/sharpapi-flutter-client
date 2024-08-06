@@ -62,7 +62,7 @@ class DioImpl extends DioHelper {
 
     dio.options.headers = {
       if (isMultipart) 'Content-Type': 'multipart/form-data',
-      'User-Agent': 'SharpAPIDartAgent/1.0.0',
+      'User-Agent': 'SharpAPIDartAgent/1.2.0',
       if (!isMultipart) 'Accept': 'application/json',
       if (token != null)
         'Authorization': 'Bearer $token'
@@ -111,7 +111,7 @@ class DioImpl extends DioHelper {
 
     dio.options.headers = {
       if (isMultipart) 'Content-Type': 'multipart/form-data',
-      'User-Agent': 'SharpAPIDartAgent/1.0.0',
+      'User-Agent': 'SharpAPIDartAgent/1.2.0',
       if (!isMultipart) 'Accept': 'application/json',
       if (token != null)
         'Authorization': 'Bearer $token'

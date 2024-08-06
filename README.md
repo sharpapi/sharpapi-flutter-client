@@ -114,6 +114,7 @@ An optional output language parameter can also be provided (`English` value is s
   ///*** parse resume
   SharpApi.parseResume(
     resume: File(''),
+    language: SharpApiLanguages.ENGLISH, // optional language
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -131,6 +132,18 @@ The only mandatory parameter is `name`.
   ///*** generate job description
   SharpApi.generateJobDescription(
     name: 'ANY_JOB_TITLE',
+    companyName: 'ANY_COMPANY_NAME',      // optional company name
+    minimumEducation: 'Bachelor Degree',  // optional minimum education
+    minimumWorkExperience: '2 years',     // optional minimum work experience
+    employmentType: 'Full Time',          // optional employment type
+    country: 'United States',             // optional country
+    remote: true,                         // optional remote
+    visaSponsored: true,                  // optional visa sponsored
+    requiredSkills: ['skill1', 'skill2'], // optional required skills
+    optionalSkills: ['skill3', 'skill4'], // optional optional skills
+    language: SharpApiLanguages.ENGLISH,  // optional language
+    voiceTone: 'neutral',                 // optional voice tone
+    context: 'avoid using abbreviations', // optional context
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -147,6 +160,8 @@ value (1.0-10.0) where 10 equals 100%, the highest relevance score.
   ///*** related skills
   SharpApi.relatedSkills(
     skill: 'ANY_SKILL',
+    language: SharpApiLanguages.ENGLISH,  // optional language
+    maxQuantity: 5,                       // optional max quantity
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -163,6 +178,8 @@ float value (1.0-10.0) where 10 equals 100%, the highest relevance score.
   ///*** related job positions
   SharpApi.relatedJobPositions(
     jobTitle: 'ANY_JOB_TITLE',
+    language: SharpApiLanguages.ENGLISH,  // optional language
+    maxQuantity: 5,                       // optional max quantity
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -181,6 +198,7 @@ with a score between 0-100%. Great for sentiment report processing for any onlin
   ///*** product review sentiment
   SharpApi.productReviewSentiment(
     content: 'ANY_CONTENT',
+    language: SharpApiLanguages.ENGLISH,  // optional language
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -199,6 +217,10 @@ Comes in handy with populating product catalogue data and bulk products' process
   ///*** product categories
   SharpApi.productCategories(
     content: 'ANY_CONTENT',
+    language: SharpApiLanguages.ENGLISH,  // optional language
+    maxQuantity: 5,                       // optional max quantity
+    context: 'avoid using abbreviations', // optional context
+    voiceTone: 'neutral',                 // optional voice tone
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -216,6 +238,9 @@ Comes in handy with populating product catalog data and bulk products processing
   ///*** generate product intro
   SharpApi.generateProductIntro(
     content: 'ANY_CONTENT',
+    language: SharpApiLanguages.ENGLISH,  // optional language
+    voiceTone: 'neutral',                 // optional voice tone
+    maxLength: 500,                       // optional max length
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -233,6 +258,10 @@ so you can personalize the rest of the email easily.
   ///*** generate thank you email
   SharpApi.generateThankYouEmail(
     content: 'ANY_CONTENT',
+    language: SharpApiLanguages.ENGLISH,  // optional language
+    voiceTone: 'neutral',                 // optional voice tone
+    maxLength: 500,                       // optional max length
+    context: 'avoid using abbreviations', // optional context
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -241,6 +270,53 @@ so you can personalize the rest of the email easily.
 ```
 
 ### Content
+
+#### Paraphrase / Rephrase Text
+
+Generates a paraphrased version of the provided text.
+Only the `content` parameter is required. You can define the output language,
+maximum character length, and tone of voice.
+
+Additional instructions on how to process the text can be provided in the context parameter.
+Please keep in mind that `max_length` serves as a strong suggestion
+for the Language Model, rather than a strict requirement,
+to maintain the general sense of the outcome.
+
+You can set your preferred writing style by providing an optional `voice_tone` parameter.
+It can be adjectives like `funny` or `joyous`, or even the name of a famous writer.
+
+This API method also provides an optional `context` parameter,
+which can be used to supply additional flexible instructions for content processing.
+
+```dart
+  ///*** paraphrase text
+  SharpApi.paraphrase(
+    text: 'ANY_TEXT',
+    language: SharpApiLanguages.ENGLISH,   // optional language
+    maxLength: 500,                        // optional length
+    voiceTone: 'neutral',                  // optional voice tone
+    context: 'avoid using abbreviations',  // optional context
+  ).then((value) {
+    /// do something with the [value] here
+  }).catchError((error) {
+    /// do something with the [error] here
+  });
+```
+
+#### Proofread Text + Grammar Check
+
+Proofreads (and checks grammar) a provided text.
+
+```dart
+  ///*** proofread text
+  SharpApi.proofread(
+    text: 'ANY_TEXT',
+  ).then((value) {
+    /// do something with the [value] here
+  }).catchError((error) {
+    /// do something with the [error] here
+  });
+```
 
 #### Translate Text
 
@@ -251,7 +327,9 @@ Please check included `SharpApiLanguages` _Enum_ class for details.
   ///*** translate text
   SharpApi.translate(
     text: 'ANY_TEXT',
-    language: 'ANY_LANGUAGE', // user language string from [SharpApiLanguages] class
+    language: SharpApiLanguages.ENGLISH,  // optional language
+    voiceTone: 'neutral',                 // optional voice tone
+    context: 'avoid using abbreviations', // optional context
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -320,6 +398,8 @@ Generates a list of unique keywords/tags based on the provided content.
   ///*** generate keywords
   SharpApi.generateKeywords(
     text: 'ANY_TEXT',
+    language: SharpApiLanguages.ENGLISH,  // optional language
+    voiceTone: 'neutral',                 // optional voice tone
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -337,6 +417,9 @@ marketing introductions of longer texts.
   ///*** summarize text
   SharpApi.summarizeText(
     text: 'ANY_TEXT',
+    language: SharpApiLanguages.ENGLISH,  // optional language
+    voiceTone: 'neutral',                 // optional voice tone
+    maxLength: 500,                       // optional max length
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -355,6 +438,8 @@ link to the website and pictures URL to get as many tags populated as possible.
   ///*** generate seo tags
   SharpApi.generateSeoTags(
     content: 'ANY_CONTENT',
+    language: SharpApiLanguages.ENGLISH,  // optional language
+    voiceTone: 'neutral',                 // optional voice tone
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -374,6 +459,7 @@ Great for sentiment report processing for any online store.
   ///*** travel review sentiment
   SharpApi.travelReviewSentiment(
     content: 'ANY_CONTENT',
+    language: SharpApiLanguages.ENGLISH,  // optional language
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -394,6 +480,12 @@ Only first parameter `productName` is required.
   ///*** tours and activities product categories
   SharpApi.toursAndActivitiesProductCategories(
     productName: 'ANY_PRODUCT_NAME',
+    language: SharpApiLanguages.ENGLISH,  // optional language
+    voiceTone: 'neutral',                 // optional voice tone
+    context: 'avoid using abbreviations', // optional context
+    maxQuantity: 5,                       // optional max quantity
+    country: 'United States',             // optional country
+    city: 'New York',                     // optional city
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
@@ -414,12 +506,76 @@ Only first parameter `productName` is required.
   ///*** hospitality product categories
   SharpApi.hospitalityProductCategories(
     productName: 'ANY_PRODUCT_NAME',
+    language: SharpApiLanguages.ENGLISH,  // optional language
+    voiceTone: 'neutral',                 // optional voice tone
+    context: 'avoid using abbreviations', // optional context
+    maxQuantity: 5,                       // optional max quantity
+    country: 'United States',             // optional country
+    city: 'New York',                     // optional city
   ).then((value) {
     /// do something with the [value] here
   }).catchError((error) {
     /// do something with the [error] here
   });
 ```
+
+### 🤖 Technical API Endpoints
+
+#### Subscription information / quota check
+Endpoint to check details regarding the subscription's current period
+
+```dart
+  ///*** quota
+  SharpApi.quota().then((value) {
+    /// do something with the [value] here
+  }).catchError((error) {
+    /// do something with the [error] here
+  });
+```
+
+will result in:
+```json
+{
+    "timestamp": "2024-03-19T12:49:41.445736Z",
+    "on_trial": false,
+    "trial_ends": "2024-03-17T07:57:46.000000Z",
+    "subscribed": true,
+    "current_subscription_start": "2024-03-18T12:37:39.000000Z",
+    "current_subscription_end": "2024-04-18T12:37:39.000000Z",
+    "subscription_words_quota": 100000,
+    "subscription_words_used": 9608,
+    "subscription_words_used_percentage": 0.1
+}
+```
+
+`subscription_words_used_percentage` is a percentage of current monthly quota usage
+and might serve as an alert to the user of the depleted credits.
+With a value above 80%, it's advised to subscribe to more credits
+at https://sharpapi.com/dashboard/credits to avoid service disruption.
+
+These values are also available in the Dashboard at https://sharpapi.com/dashboard
+
+#### Ping
+Simple PING endpoint to check the availability of the API and it's internal timze zone (timestamp).
+
+```dart
+  ///*** ping
+  SharpApi.ping().then((value) {
+    /// do something with the [value] here
+  }).catchError((error) {
+    /// do something with the [error] here
+  });
+```
+
+will result in:
+```json
+{
+  "ping": "pong",
+  "timestamp": "2024-03-12T08:50:11.188308Z"
+}
+```
+
+---
 
 ### Do you think our API is missing some obvious functionality?
 
