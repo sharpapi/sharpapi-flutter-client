@@ -463,6 +463,18 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** generate job description
     SharpApi.generateJobDescription(
       name: 'ANY_JOB_TITLE',
+      companyName: 'ANY_COMPANY_NAME',      // optional company name
+      minimumEducation: 'Bachelor Degree',  // optional minimum education
+      minimumWorkExperience: '2 years',     // optional minimum work experience
+      employmentType: 'Full Time',          // optional employment type
+      country: 'United States',             // optional country
+      remote: true,                         // optional remote
+      visaSponsored: true,                  // optional visa sponsored
+      requiredSkills: ['skill1', 'skill2'], // optional required skills
+      optionalSkills: ['skill3', 'skill4'], // optional optional skills
+      language: SharpApiLanguages.ENGLISH,  // optional language
+      voiceTone: 'neutral',                 // optional voice tone
+      context: 'avoid using abbreviations', // optional context
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -472,6 +484,8 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** related job positions
     SharpApi.relatedJobPositions(
       jobTitle: 'ANY_JOB_TITLE',
+      language: SharpApiLanguages.ENGLISH,  // optional language
+      maxQuantity: 5,                       // optional max quantity
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -481,6 +495,8 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** related skills
     SharpApi.relatedSkills(
       skill: 'ANY_SKILL',
+      language: SharpApiLanguages.ENGLISH,  // optional language
+      maxQuantity: 5,                       // optional max quantity
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -490,6 +506,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** parse resume
     SharpApi.parseResume(
       resume: File(''),
+      language: SharpApiLanguages.ENGLISH, // optional language
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -499,6 +516,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** product review sentiment
     SharpApi.productReviewSentiment(
       content: 'ANY_CONTENT',
+      language: SharpApiLanguages.ENGLISH,  // optional language
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -508,6 +526,10 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** product categories
     SharpApi.productCategories(
       content: 'ANY_CONTENT',
+      language: SharpApiLanguages.ENGLISH,  // optional language
+      maxQuantity: 5,                       // optional max quantity
+      context: 'avoid using abbreviations', // optional context
+      voiceTone: 'neutral',                 // optional voice tone
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -517,6 +539,9 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** generate product intro
     SharpApi.generateProductIntro(
       content: 'ANY_CONTENT',
+      language: SharpApiLanguages.ENGLISH,  // optional language
+      voiceTone: 'neutral',                 // optional voice tone
+      maxLength: 500,                       // optional max length
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -526,6 +551,10 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** generate thank you email
     SharpApi.generateThankYouEmail(
       content: 'ANY_CONTENT',
+      language: SharpApiLanguages.ENGLISH,  // optional language
+      voiceTone: 'neutral',                 // optional voice tone
+      maxLength: 500,                       // optional max length
+      context: 'avoid using abbreviations', // optional context
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -535,6 +564,8 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** generate seo tags
     SharpApi.generateSeoTags(
       content: 'ANY_CONTENT',
+      language: SharpApiLanguages.ENGLISH,  // optional language
+      voiceTone: 'neutral',                 // optional voice tone
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -544,6 +575,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** travel review sentiment
     SharpApi.travelReviewSentiment(
       content: 'ANY_CONTENT',
+      language: SharpApiLanguages.ENGLISH,  // optional language
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -553,6 +585,12 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** tours and activities product categories
     SharpApi.toursAndActivitiesProductCategories(
       productName: 'ANY_PRODUCT_NAME',
+      language: SharpApiLanguages.ENGLISH,  // optional language
+      voiceTone: 'neutral',                 // optional voice tone
+      context: 'avoid using abbreviations', // optional context
+      maxQuantity: 5,                       // optional max quantity
+      country: 'United States',             // optional country
+      city: 'New York',                     // optional city
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -562,6 +600,12 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** hospitality product categories
     SharpApi.hospitalityProductCategories(
       productName: 'ANY_PRODUCT_NAME',
+      language: SharpApiLanguages.ENGLISH,  // optional language
+      voiceTone: 'neutral',                 // optional voice tone
+      context: 'avoid using abbreviations', // optional context
+      maxQuantity: 5,                       // optional max quantity
+      country: 'United States',             // optional country
+      city: 'New York',                     // optional city
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -571,7 +615,9 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** translate text
     SharpApi.translate(
       text: 'ANY_TEXT',
-      language: 'ANY_LANGUAGE', // user language string from [SharpApiLanguages] class
+      language: SharpApiLanguages.ENGLISH,  // optional language
+      voiceTone: 'neutral',                 // optional voice tone
+      context: 'avoid using abbreviations', // optional context
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -608,6 +654,9 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** summarize text
     SharpApi.summarizeText(
       text: 'ANY_TEXT',
+      language: SharpApiLanguages.ENGLISH,  // optional language
+      voiceTone: 'neutral',                 // optional voice tone
+      maxLength: 500,                       // optional max length
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
@@ -617,6 +666,8 @@ class _MyHomePageState extends State<MyHomePage> {
     ///*** generate keywords
     SharpApi.generateKeywords(
       text: 'ANY_TEXT',
+      language: SharpApiLanguages.ENGLISH,  // optional language
+      voiceTone: 'neutral',                 // optional voice tone
     ).then((value) {
       /// do something with the [value] here
     }).catchError((error) {
